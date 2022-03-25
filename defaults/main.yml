@@ -1,3 +1,7 @@
+grafana_agent_version: "0.23.0"
+grafana_agent_url: "https://github.com/grafana/agent/releases/download/v{{ grafana_agent_version }}/grafana-agent-{{ grafana_agent_version }}-1.amd64.deb"
+grafana_agent_checksum: "sha256:9549c9155aec205343c9931eb0eb50fa8e47376664566e80532ef7cb2b2c8792"
+
 grafana_agent_prometheus_target: "https://prom-ship.example.org/api/v1/write"
 grafana_agent_prometheus_target_ssl: True
 
