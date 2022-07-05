@@ -1,27 +1,11 @@
-# - name: Install Grafana Agent
-#   become: True
-#   apt:
-#     state: present
-#     update_cache: yes
-#     cache_valid_time: 1800
-#     name:
-#       - grafana-agent
-
-# Download as extra step instead of using apt-module directly,
-# so we can check the checksum
-- name: Download Grafana
-  become: True
-  get_url:
-    url: "{{ grafana_agent_url }}"
-    dest: /tmp/grafana-agent.deb
-    checksum: "{{ grafana_agent_checksum }}"
-
 - name: Install Grafana Agent
   become: True
   apt:
     state: present
-    update_cache: no
-    deb: /tmp/grafana-agent.deb
+    update_cache: yes
+    cache_valid_time: 1800
+    name:
+      - grafana-agent
 
 - name: Install node exporter plugins
   when: grafana_agent_enable_nodeexporter
@@ -41,12 +25,6 @@
     state: stopped
     enabled: no
     masked: yes
-
-- name: Ensure /etc/grafana-agent exists
-  become: True
-  file:
-    dest: /etc/grafana-agent
-    state: directory
 
 - name: Configure Grafana Agent (environment)
   become: True
