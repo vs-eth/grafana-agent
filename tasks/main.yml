@@ -1,3 +1,10 @@
+- name: Ensure /etc/grafana-agent exists
+  become: True
+  file:
+    dest: /etc/grafana-agent
+    state: directory
+    mode: 0770
+
 - name: Install Grafana Agent
   become: True
   apt:
