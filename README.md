@@ -24,7 +24,6 @@ is:
               __path__: /var/log/*log
               hostname: "{{ ansible_fqdn }}"
 
-
 ## Postgres exporter
 
 Follow the [official documentation](https://github.com/prometheus-community/postgres_exporter#running-as-non-superuser)
