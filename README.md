@@ -26,6 +26,15 @@ is:
 
 ## Blackbox (Website probes)
 
+Set `grafana_agent_enable_blackbox` to `true` and add the targets you want to
+be probed in `grafana_agent_blackbox_targets`, e.g:
+
+    grafana_agent_blackbox_targets:
+      - name: example
+        address: example.com
+        module: http_2xx
+
+The module must be a [blackbox module](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md) defined in `grafana_agent_blackbox_module_config`.
 
 
 ## Postgres exporter
