@@ -1,3 +1,14 @@
+- name: Add grafana repository key
+  ansible.builtin.apt_key:
+    url: https://apt.grafana.com/gpg.key
+    state: present
+
+- name: Add grafana repository
+  ansible.builtin.apt_repository:
+    repo: 'deb https://apt.grafana.com stable main'
+    state: present
+  register: repochanged
+
 - name: Ensure /etc/grafana-agent exists
   become: True
   file:
