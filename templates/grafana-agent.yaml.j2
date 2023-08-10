@@ -181,6 +181,8 @@ integrations:
     relabel_configs:
       - target_label: instance
         source_labels: [__param_target]
+      - target_label: module
+        source_labels: [__param_module]
     blackbox_targets:
 {% for target in grafana_agent_blackbox_targets %}      - name: {{ target.name | default(target.address) }}
         address: {{ target.address }}
