@@ -1,13 +1,13 @@
-- name: restart grafana-agent
-  become: True
-  service:
+- name: Restart grafana-agent
+  become: true
+  ansible.builtin.service:
     name: grafana-agent
     state: restarted
-    enabled: yes
+    enabled: true
 
-- name: restart prometheus-node-exporter
-  become: True
-  service:
+- name: Restart prometheus-node-exporter
+  become: true
+  ansible.builtin.service:
     name: grafana-agent
     state: restarted
-    enabled: yes
+    enabled: true
