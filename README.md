@@ -3,24 +3,33 @@
 This sets up the grafana agent to send metrics to a remote prometheus `remote_write` compatible endpoint.
 So far, only the integrated node_exporter is configured.
 
+## Requirements
+
+This role requires the Ansible action plugin `ansible_merge_vars`.
+
 ## Config options
 
-* `grafana_agent_prometheus_scrapes`: Allows you to pass through Prometheus scraping blocks
-* `grafana_agent_logs_scrape`: Allows you to pass through loki scraping blocks
-* `grafana_agent_blackbox_targets`: Allows you to pass through blackbox scraping blocks
+* `grafana_agent__<name>_prometheus_scrapes__to_merge`: Allows you to pass through Prometheus scraping blocks
+* `grafana_agent__<name>_logs_scrapes__to_merge`: Allows you to pass through loki scraping blocks
+* `grafana_agent__<name>_blackbox_targets__to_merge`: Allows you to pass through blackbox scraping blocks
 
-Note: Both options also exist with `_host`, `_group_a`, `_group_b`, `_group_c` and `_special` suffixes.
-All values are merged together in the role - this allows you to sidestep group var merging issues.
+\* When config-options are defined in `group_vars` as well as in `host_vars`
+Ansible would overwrite the `group_vars` variable with the one from the
+`host_vars` (Similarly, when it's defined in several `group_vars`). To avoid
+this, this role merges all dictionaries with the suffix
+`_prometheus_scrapes__to_merge` (or `_logs_scrapes__to_merge`, etc.).
+**This only works if the variables have different names, therefore `<name>`
+should be unique across all group_vars and host_vars a host is in**.
 
 ## Logs
 
 You can enable log-collection using the integrated Promtail.
-For this, the variables `grafana_agent_logs_scrape_config` and
+For this, some scrape config `grafana_agent__<name>_logs_scrapes__to_merge` and
 `grafana_agent_logs_client_url` must be set. The latter is a Loki-endpoint to
-which the logs will be sent. An example for `grafana_agent_logs_scrape_config`
+which the logs will be sent. An example for `grafana_agent__<name>_logs_scrapes__to_merge`
 is:
 
-    grafana_agent_logs_scrape_config:
+    grafana_agent__rundeck_logs_scrapes__to_merge:
       - job_name: varlogs
         static_configs:
           - targets: [localhost]
@@ -32,9 +41,9 @@ is:
 ## Blackbox (Website probes)
 
 Set `grafana_agent_enable_blackbox` to `true` and add the targets you want to
-be probed in `grafana_agent_blackbox_targets`, e.g:
+be probed in `grafana_agent__<name>_blackbox_targets__to_merge`, e.g:
 
-    grafana_agent_blackbox_targets:
+    grafana_agent__blackbox_targets__to_merge:
       - name: example
         address: example.com
         module: http_2xx
