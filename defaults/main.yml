@@ -74,7 +74,6 @@ grafana_agent_prometheus_nodeexporter_zoneinfo: false
 
 # Blackbox
 grafana_agent_enable_blackbox: false
-grafana_agent_blackbox_targets: []
 grafana_agent_blackbox_scrape_interval: 1m
 grafana_agent_blackbox_module_config:
   - http_2xx:
@@ -96,5 +95,3 @@ grafana_agent_prometheus_postgresexporter_autodiscoverdatabases: false
 # Example https://github.com/prometheus-community/postgres_exporter/blob/master/queries.yaml
 # grafana_agent_prometheus_postgresexporter_querypath: "/path/to/queries.yaml"
 grafana_agent_prometheus_postgresexporter_disabledefaultmetrics: false
-
-grafana_agent_prometheus_scrapes: []
