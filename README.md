@@ -43,7 +43,7 @@ is:
 Set `grafana_agent_enable_blackbox` to `true` and add the targets you want to
 be probed in `grafana_agent__<name>_blackbox_targets__to_merge`, e.g:
 
-    grafana_agent__blackbox_targets__to_merge:
+    grafana_agent__websites_blackbox_targets__to_merge:
       - name: example
         address: example.com
         module: http_2xx
